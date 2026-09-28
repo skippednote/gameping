@@ -1,0 +1,144 @@
+# Built-in game → region map.
+#
+# Override or extend with ~/.config/gameping/games.toml (same format).
+# A game in the user file with the same `id` replaces the built-in one.
+#
+# `src` formats:
+#   icmp:<host>            ICMP echo to a host (direct game beacon/relay)
+#   tcp:<host>:<port>      TCP connect time
+#   aws:<region>           TCP connect to the AWS regional endpoint (proxy)
+#   gcp:<region>           HTTPS round trip to a Cloud Run service via gcping.com (proxy)
+#   valve:*                every Valve SDR relay POP outside China (direct, fetched live)
+#   valve:all              every Valve SDR relay POP including China-only ones
+#   valve:<pop>            one Valve POP, e.g. valve:bom2
+#
+# `direct = true` marks measurements against the game's own infrastructure.
+# Everything else is an estimate: latency to the cloud region the game runs in.
+
+[[game]]
+id = "fortnite"
+name = "Fortnite"
+targets = [
+  { region = "Asia (Tokyo)",          src = "icmp:ping-asia.ds.on.epicgames.com", direct = true },
+  { region = "Middle East (Bahrain)", src = "icmp:ping-me.ds.on.epicgames.com",   direct = true },
+  { region = "Europe",                src = "icmp:ping-eu.ds.on.epicgames.com",   direct = true },
+  { region = "NA East",               src = "icmp:ping-nae.ds.on.epicgames.com",  direct = true },
+  { region = "NA Central",            src = "icmp:ping-nac.ds.on.epicgames.com",  direct = true },
+  { region = "NA West",               src = "icmp:ping-naw.ds.on.epicgames.com",  direct = true },
+  { region = "Oceania",               src = "icmp:ping-oce.ds.on.epicgames.com",  direct = true },
+  { region = "Brazil",                src = "icmp:ping-br.ds.on.epicgames.com",   direct = true },
+]
+
+[[game]]
+id = "apex"
+name = "Apex Legends"
+targets = [
+  { src = "aws:ap-south-1" },
+  { src = "gcp:asia-south1" },
+  { src = "aws:ap-southeast-1" },
+  { src = "gcp:asia-southeast1" },
+  { src = "aws:ap-northeast-1" },
+  { src = "aws:me-south-1" },
+  { src = "aws:eu-central-1" },
+  { src = "aws:eu-west-2" },
+  { src = "gcp:europe-west3" },
+  { src = "aws:us-east-1" },
+  { src = "gcp:us-central1" },
+  { src = "aws:us-west-2" },
+  { src = "aws:sa-east-1" },
+  { src = "aws:ap-southeast-2" },
+]
+
+[[game]]
+id = "mw"
+name = "Call of Duty: MW / Warzone"
+targets = [
+  { src = "gcp:asia-south1" },
+  { src = "aws:ap-south-1" },
+  { src = "aws:me-central-1" },
+  { src = "gcp:me-central1" },
+  { src = "gcp:me-west1" },
+  { src = "gcp:asia-southeast1" },
+  { src = "gcp:asia-northeast1" },
+  { src = "gcp:europe-west3" },
+  { src = "gcp:europe-west2" },
+  { src = "gcp:us-east4" },
+  { src = "gcp:us-central1" },
+  { src = "gcp:us-west2" },
+]
+
+[[game]]
+id = "cs2"
+name = "Counter-Strike 2"
+targets = [{ src = "valve:*", direct = true }]
+
+[[game]]
+id = "dota2"
+name = "Dota 2"
+targets = [{ src = "valve:*", direct = true }]
+
+[[game]]
+id = "deadlock"
+name = "Deadlock"
+targets = [{ src = "valve:*", direct = true }]
+
+[[game]]
+id = "valorant"
+name = "Valorant"
+targets = [
+  { src = "aws:ap-south-1" },
+  { src = "aws:me-south-1" },
+  { src = "aws:ap-southeast-1" },
+  { src = "aws:ap-east-1" },
+  { src = "aws:ap-northeast-1" },
+  { src = "aws:eu-central-1" },
+  { src = "aws:eu-west-3" },
+  { src = "aws:us-east-1" },
+  { src = "aws:us-west-2" },
+  { src = "aws:ap-southeast-2" },
+]
+
+[[game]]
+id = "lol"
+name = "League of Legends"
+targets = [
+  { src = "aws:ap-southeast-1" },
+  { src = "aws:me-south-1" },
+  { src = "aws:ap-northeast-1" },
+  { src = "aws:ap-northeast-2" },
+  { src = "aws:eu-central-1" },
+  { src = "aws:us-east-2" },
+  { src = "aws:ap-southeast-2" },
+]
+
+[[game]]
+id = "pubg"
+name = "PUBG: Battlegrounds"
+targets = [
+  { src = "aws:ap-south-1" },
+  { src = "aws:ap-southeast-1" },
+  { src = "aws:ap-northeast-1" },
+  { src = "aws:ap-northeast-2" },
+  { src = "aws:me-central-1" },
+  { src = "aws:eu-central-1" },
+  { src = "aws:us-east-1" },
+  { src = "aws:us-west-1" },
+  { src = "aws:sa-east-1" },
+  { src = "aws:ap-southeast-2" },
+]
+
+[[game]]
+id = "overwatch"
+name = "Overwatch 2"
+targets = [
+  { src = "gcp:asia-southeast1" },
+  { src = "gcp:asia-northeast1" },
+  { src = "gcp:asia-northeast3" },
+  { src = "gcp:me-central1" },
+  { src = "gcp:europe-west4" },
+  { src = "gcp:europe-west3" },
+  { src = "gcp:us-central1" },
+  { src = "gcp:us-east1" },
+  { src = "gcp:us-west1" },
+  { src = "gcp:australia-southeast1" },
+]

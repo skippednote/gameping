@@ -1,0 +1,28 @@
+[package]
+name = "gameping"
+version = "0.1.0"
+edition = "2024"
+description = "Latency to game servers and the cloud regions games run in, with a live TUI"
+license = "MIT"
+repository = "https://github.com/skippednote/gameping"
+readme = "README.md"
+keywords = ["ping", "latency", "gaming", "tui", "network"]
+categories = ["command-line-utilities", "network-programming"]
+
+[profile.release]
+strip = true
+lto = "thin"
+
+[dependencies]
+anyhow = "1.0.104"
+clap = { version = "4.6.7", features = ["derive"] }
+comfy-table = "8.0.1"
+crossterm = { version = "0.29.0", features = ["event-stream"] }
+futures = "0.3.34"
+ratatui = "0.30.2"
+reqwest = { version = "0.13.5", default-features = false, features = ["rustls", "json"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+surge-ping = "0.9.1"
+tokio = { version = "1.53.1", features = ["full"] }
+toml = "1.1.6"
