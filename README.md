@@ -2,6 +2,8 @@
 
 Latency to game servers — and to the cloud regions games run in — with a live TUI.
 
+![gameping TUI showing Call of Duty regions: live table with trend sparklines, latency chart and best-region bars](docs/screenshot.png)
+
 ```
 gameping                      # TUI: tabs per game, live table, latency chart, best-region bars
 gameping fortnite cs2         # only these games
